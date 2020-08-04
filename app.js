@@ -6,9 +6,22 @@ const morgan = require('morgan');
 //parse request body as json
 const bodyParser = require('body-parser');
 
+// mongo db connection
+const mongoose = require('mongoose');
+
+const productRoutes = require('./api/routes/products');
+const orderRoutes = require('./api/routes/orders');
+
+mongoose.connect(
+    'mongodb+srv://tolamusti:' 
+    + process.env.MONGO_ATLAS_PW  
+    + '@node-rest-shop.hfurm.mongodb.net/<dbname>?retryWrites=true&w=majority'
+);
+
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
 
 // Cors Handling
 app.use((req, res, next) => {
@@ -21,10 +34,6 @@ app.use((req, res, next) => {
 
     next();
 });
-
-
-const productRoutes = require('./api/routes/products');
-const orderRoutes = require('./api/routes/orders');
 
 // routers
 app.use('/products', productRoutes);

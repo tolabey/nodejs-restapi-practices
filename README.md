@@ -13,6 +13,10 @@ It runs serverjs with nodemon library.
 
 The server will reload if you make edits.
 
+### `nodemon.json`
+It contains my personal passwords to connect mongodb atlas
+
+
 ### `npm test`
 
 It will be coming soon..
